@@ -48,7 +48,7 @@ RUN ["chmod", "+x", "/docker-entrypoint.sh"]
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
 
-ENV MAGENTO_RUN_MODE developer
+ENV MAGENTO_RUN_MODE production
 ENV UPLOAD_MAX_FILESIZE 64M
 
 ADD etc/php-fpm.ini /usr/local/etc/php/conf.d/zz-magento.ini
