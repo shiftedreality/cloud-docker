@@ -65,5 +65,6 @@ ADD bin/* /usr/local/bin/
 
 RUN ["chmod", "+x", "/usr/local/bin/magento-installer"]
 RUN ["chmod", "+x", "/usr/local/bin/magento-command"]
+RUN ["chmod", "+x", "/usr/local/bin/ece-command"]
 
 CMD ["bash"]
