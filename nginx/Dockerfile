@@ -1,9 +1,5 @@
 FROM nginx:1.9
 
-RUN apt-get update \
-  && apt-get install -y \
-    wget
-
 ADD etc/vhost.conf /etc/nginx/conf.d/default.conf
 COPY etc/certs/ /etc/nginx/ssl/
 ADD bin/* /usr/local/bin/
