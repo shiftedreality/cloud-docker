@@ -1,4 +1,4 @@
-FROM php:7.1-fpm
+FROM php:7.0-cli
 
 # Install dependencies
 RUN apt-get update \
@@ -11,7 +11,10 @@ RUN apt-get update \
     libxslt1-dev \ 
     sendmail-bin \ 
     sendmail \ 
-    sudo
+    sudo \ 
+    cron \ 
+    rsyslog \ 
+    mysql-client
 
 # Configure the gd library
 RUN docker-php-ext-configure \
@@ -48,11 +51,19 @@ RUN ["chmod", "+x", "/docker-entrypoint.sh"]
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
 
-ENV MAGENTO_RUN_MODE production
-ENV UPLOAD_MAX_FILESIZE 64M
+ENV COMPOSER_ALLOW_SUPERUSER 1
 
-ADD etc/php-fpm.ini /usr/local/etc/php/conf.d/zz-magento.ini
+VOLUME /root/.composer/cache
 
-ADD etc/php-fpm.conf /usr/local/etc/
+ADD etc/php-cli.ini /usr/local/etc/php/conf.d/zz-magento.ini
 
-CMD ["php-fpm", "-F"]
+# Get composer installed to /usr/local/bin/composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+ADD bin/* /usr/local/bin/
+
+RUN ["chmod", "+x", "/usr/local/bin/magento-installer"]
+RUN ["chmod", "+x", "/usr/local/bin/magento-command"]
+RUN ["chmod", "+x", "/usr/local/bin/ece-command"]
+
+CMD ["bash"]
