@@ -61,4 +61,9 @@ ADD etc/php-cli.ini /usr/local/etc/php/conf.d/zz-magento.ini
 # Get composer installed to /usr/local/bin/composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
+ADD bin/* /usr/local/bin/
+
+RUN ["chmod", "+x", "/usr/local/bin/magento-installer"]
+RUN ["chmod", "+x", "/usr/local/bin/magento-command"]
+
 CMD ["bash"]
