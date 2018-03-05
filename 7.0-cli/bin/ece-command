@@ -2,7 +2,7 @@
 
 [ "$DEBUG" = "true" ] && set -x
 
-ECE_COMMAND="$MAGENTO_ROOT/bin/magento"
+ECE_COMMAND="$MAGENTO_ROOT/vendor/bin/ece-tools"
 
 chmod +x $ECE_COMMAND
 
