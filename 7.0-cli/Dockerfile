@@ -14,7 +14,8 @@ RUN apt-get update \
     sudo \ 
     cron \ 
     rsyslog \ 
-    mysql-client
+    mysql-client \
+    git
 
 # Configure the gd library
 RUN docker-php-ext-configure \
